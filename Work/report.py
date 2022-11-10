@@ -12,6 +12,7 @@ def read_portfolio(filename):
         rows = csv.reader(f)
         headers = next(rows)
         for nrow, row in enumerate(rows, start=1):
+            row = [types[n](r) for n, r in enumerate(row)] # 타입 변환
             holding = dict(zip(headers, row))
             portfolio.append(holding.copy()) # 가변자료형은 얕은복사x
     return portfolio
@@ -29,8 +30,6 @@ def read_price(filename):
                 break        
     return price
     
-
-
 def portfolio_cost(portfolio):
     total_cost = 0.0
     for i in portfolio:
@@ -40,6 +39,7 @@ def portfolio_cost(portfolio):
         total_cost += cost
     return total_cost
 
+types = [str, int, float]
 if len(sys.argv) == 3:
     pfFile = sys.argv[1]
     prFile = sys.argv[2]
@@ -65,6 +65,6 @@ for pf in portfolio:
             name = pf['name']
             shares = pf['shares']
             change = float(pr['price']) - float(pf['price'])
-            prices = '$' + str(pf['price']) # 여기부터안됨
+            prices = '$' + str(pf['price'])
             
-            print(f'{name:>10s} {shares:>10s} {prices:>10s} {change:>10.2f}')
+            print(f'{name:>10s} {shares:>10d} {prices:>10s} {change:>10.2f}')
