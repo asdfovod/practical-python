@@ -1,9 +1,9 @@
 # pcost.py
-#
+# 
 # Exercise 1.27
 import sys, csv
 
-def portfolio_cost(filename):
+def portfolio_cost(filename): 
     total_cost = 0
     with open(filename, 'rt') as f:
         rows = csv.reader(f)
