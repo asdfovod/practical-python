@@ -22,9 +22,9 @@ def portfolio_cost(filename):
 if len(sys.argv) == 2 or not FileNotFoundError:
     filename = sys.argv[1]
 else:
-    print('File not found')
     filename = 'Data/portfolio.csv'
-cost = portfolio_cost(filename)
-print('Total cost:', cost)
+if __name__ == '__main__':
+    cost = portfolio_cost(filename)
+    print('Total cost:', cost)
 
 
