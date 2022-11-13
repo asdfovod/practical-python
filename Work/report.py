@@ -43,26 +43,19 @@ def read_price(filename, debug=False):
     
 def portfolio_cost(pfFile) -> float:
     total_cost = pcost.portfolio_cost(pfFile)
-    # total_cost = 0.0
-    # for i in portfolio:
-    #     nshare = int(i['shares'])
-    #     price = float(i['price'])
-    #     cost = nshare * price
-    #     total_cost += cost
     return total_cost
 
-def portfolio_report(pfFile, prFile):
+def main(pfFile, prFile):
     portfolio = read_portfolio(pfFile)
     price = read_price(prFile)
     cost = portfolio_cost(pfFile)
-    # print(portfolio, price, cost)
 
     print('Total cost:', cost)
     print('{:>10s} {:>10s} {:>10s} {:>10s}'.format('Name', 'Shares', 'Price', 'Change'))
     print('---------- ---------- ---------- -----------')
 
     for pf in portfolio:
-        for pr in price:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+        for pr in price:        
             if pr.get('name') == pf.get('name'):
                 name = pf['name']
                 shares = pf['shares']
@@ -70,5 +63,10 @@ def portfolio_report(pfFile, prFile):
                 prices = '$' + str(pf['price'])
                 print(f'{name:>10s} {shares:>10d} {prices:>10s} {change:10.2f}')
                 # print('%10s %10d %10s %10.2f' % (name, shares, prices, change))
-pfFile, prFile = csvfile_export()
-portfolio_report(pfFile, prFile)
+
+# pfFile, prFile = csvfile_export()
+# portfolio_report(pfFile, prFile)
+
+if __name__ == '__main__':
+    filename, pfFile, prFile = sys.argv[0], sys.argv[1], sys.argv[2]
+    main(pfFile, prFile)

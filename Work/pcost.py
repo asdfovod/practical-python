@@ -23,8 +23,13 @@ if len(sys.argv) == 2 or not FileNotFoundError:
     filename = sys.argv[1]
 else:
     filename = 'Data/portfolio.csv'
+
+def main(filename, prFile):
+    portfolio_cost(prFile)
+
 if __name__ == '__main__':
-    cost = portfolio_cost(filename)
-    print('Total cost:', cost)
+    filename = sys.argv[0]
+    prFile = sys.argv[1]
+    main(filename, prFile)
 
 
