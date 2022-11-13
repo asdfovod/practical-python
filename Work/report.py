@@ -5,7 +5,7 @@
 import sys
 import csv
 from pprint import pprint # 큰 리스트와 딕셔너리 한번에 조회
-from fileparse import parse_csv
+from fileparse import parse
 import pcost
 
 def csvfile_export():
@@ -25,7 +25,7 @@ def read_portfolio(filename) -> list:
     주식 포트폴리오 파일을 읽어와 딕셔너리의 리스트를 생성
     키: name, shares, price
     '''
-    portfolio = parse_csv(filename)
+    portfolio = parse(filename)
     return portfolio
 
 def read_price(filename, debug=False):
@@ -34,7 +34,7 @@ def read_price(filename, debug=False):
     키: name, price
     '''
     price = []
-    parsed = parse_csv(filename, types=[str,float], has_headers=False)
+    parsed = parse(filename, types=[str,float], has_headers=False)
     headers = 'name', 'price'
     for par in parsed:
         holding = {h:p for h, p in zip(headers, par)}
